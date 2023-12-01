@@ -11,10 +11,12 @@ public class Game : MonoBehaviour
     public GameObject gameCanvas;
     public GameObject sudokuFieldPanel;
     public GameObject fieldPrefab;
+    public TMP_Text timeText;
     private Dictionary<Tuple<int, int>, FieldPrefabObject> fieldPrefabObjectDictionary = new();
     private FieldPrefabObject currentHoveredObject;
     private SudokuObject currentSudokuObject;
     private SudokuObject finalObject;
+    private float playTime;
 
     [Header("Control")]
     public GameObject controlPanel;
@@ -29,6 +31,12 @@ public class Game : MonoBehaviour
         CreateSudokuField();
         CreateControlField();
         CreateSudoku();
+    }
+
+    private void Update()
+    {
+        playTime += Time.deltaTime;
+        timeText.text = playTime.ToString("00:00");
     }
 
     private void CreateSudokuField()
@@ -119,6 +127,11 @@ public class Game : MonoBehaviour
             informationButtonActive = true;
             informationButton.GetComponent<Image>().color = new Color(0.2039216f, 0.5960785f, 0.8588235f);
         }
+    }
+
+    public void ClickOnTimeButton()
+    {
+        timeText.GetComponent<Animation>().Play();
     }
 
     public void FinishGame()
