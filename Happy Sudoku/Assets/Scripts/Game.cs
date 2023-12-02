@@ -16,6 +16,7 @@ public class Game : MonoBehaviour
     private FieldPrefabObject currentHoveredObject;
     private SudokuObject currentSudokuObject;
     private SudokuObject finalObject;
+    private bool gameFinished;
     private float playTime;
 
     [Header("Control")]
@@ -35,8 +36,11 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
-        playTime += Time.deltaTime;
-        timeText.text = playTime.ToString("00:00");
+        if (!gameFinished)
+        {
+            playTime += Time.deltaTime;
+            timeText.text = playTime.ToString("00:00");
+        }
     }
 
     private void CreateSudokuField()
@@ -120,7 +124,7 @@ public class Game : MonoBehaviour
         if (informationButtonActive)
         {
             informationButtonActive = false;
-            informationButton.GetComponent<Image>().color = new Color(1f, 1f ,1f);
+            informationButton.GetComponent<Image>().color = new Color(0.2039216f, 0.2862745f, 0.3686275f);
         }
         else
         {

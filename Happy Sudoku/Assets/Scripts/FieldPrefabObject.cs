@@ -68,6 +68,8 @@ public class FieldPrefabObject
                 if (TryGetTextByName(i.ToString(), out TMP_Text note)) 
                     note.text = string.Empty;
             }
+
+            UnsetHoverMode();
         }
     }
     public void SetInfoNumber(int number)
