@@ -22,10 +22,13 @@ public class Game : MonoBehaviour
     [Header("Control")]
     public GameObject controlPanel;
     public GameObject controlPrefab;
+    public TMP_Text matchStateText;
 
     [Header("Command")]
     public Button informationButton;
     private bool informationButtonActive;
+    public Button backButton;
+    public Button finishedButton;
 
     private void Start()
     {
@@ -93,6 +96,8 @@ public class Game : MonoBehaviour
 
     private void ClickOnFieldPrefab(FieldPrefabObject fieldPrefabObject)
     {
+        if (gameFinished) return;
+
         Debug.Log($"Clicked on row: {fieldPrefabObject.Row} and column: {fieldPrefabObject.Column}");
         if (fieldPrefabObject.isChangeable)
         {
@@ -106,6 +111,8 @@ public class Game : MonoBehaviour
 
     private void ClickOnControlPrefab(ControlPrefabObject controlPrefabObject)
     {
+        if (gameFinished) return;
+
         Debug.Log($"Number: {controlPrefabObject.Number}");
         if (currentHoveredObject != null)
         {
@@ -124,12 +131,12 @@ public class Game : MonoBehaviour
         if (informationButtonActive)
         {
             informationButtonActive = false;
-            informationButton.GetComponent<Image>().color = new Color(0.2039216f, 0.2862745f, 0.3686275f);
+            informationButton.GetComponent<Image>().color = new Color(0.6078432f, 0.3490196f, 0.7137255f);
         }
         else
         {
             informationButtonActive = true;
-            informationButton.GetComponent<Image>().color = new Color(0.2039216f, 0.5960785f, 0.8588235f);
+            informationButton.GetComponent<Image>().color = new Color(0.945098f, 0.7686275f, 0.05882353f);
         }
     }
 
@@ -140,6 +147,9 @@ public class Game : MonoBehaviour
 
     public void FinishGame()
     {
+        if (gameFinished) return;
+        bool hasWrong = false;
+
         for (int row = 0; row < 9; row++)
         {
             for (int column = 0; column < 9; column++)
@@ -149,12 +159,27 @@ public class Game : MonoBehaviour
                 {
                     // richtigen wert im spiel gesetzt
                     if (finalObject.Values[row, column] == fieldObject.CurrentNumber)
+                    {
                         fieldObject.SetColorGreen();
-                    else 
+                    }
+                    else
+                    {
                         fieldObject.SetColorRed();
+                        hasWrong = true;
+                    }
                 }
             }
-        } 
+        }
+
+        if (hasWrong)
+            matchStateText.text = "Maybe next time :(";
+        else
+            matchStateText.text = "Well solved!";
+
+        finishedButton.enabled = false;
+        informationButton.enabled = false;
+        backButton.GetComponent<Animation>().Play();
+        gameFinished = true;
     }
 }
  
