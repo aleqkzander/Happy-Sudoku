@@ -26,12 +26,14 @@ public class Game : MonoBehaviour
 
     [Header("Command")]
     public Button informationButton;
+    private Color informationButtonStandardColor;
     private bool informationButtonActive;
     public Button backButton;
     public Button finishedButton;
 
     private void Start()
     {
+        informationButtonStandardColor = informationButton.GetComponent<Image>().color;
         CreateSudokuField();
         CreateControlField();
         CreateSudoku();
@@ -131,7 +133,7 @@ public class Game : MonoBehaviour
         if (informationButtonActive)
         {
             informationButtonActive = false;
-            informationButton.GetComponent<Image>().color = new Color(0.6078432f, 0.3490196f, 0.7137255f);
+            informationButton.GetComponent<Image>().color = informationButtonStandardColor;
         }
         else
         {
