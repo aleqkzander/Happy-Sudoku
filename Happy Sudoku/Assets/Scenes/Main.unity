@@ -643,8 +643,8 @@ GameObject:
   - component: {fileID: 591676241}
   - component: {fileID: 591676240}
   - component: {fileID: 591676239}
-  - component: {fileID: 591676243}
   - component: {fileID: 591676244}
+  - component: {fileID: 591676243}
   m_Layer: 5
   m_Name: Main
   m_TagString: Untagged
