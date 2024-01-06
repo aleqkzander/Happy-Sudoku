@@ -23,8 +23,18 @@ public class MainMenu : MonoBehaviour
         GameSettings.difficutlyLevel = 3;
     }
 
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     public void StopGame()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

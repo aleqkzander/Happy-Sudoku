@@ -34,9 +34,11 @@ public class SudokuGenerator
 
         List<Tuple<int ,int>> values = GetListWithValues();
 
-        int endOfLoopValue = 10;
-        if (GameSettings.difficutlyLevel == 1) endOfLoopValue = 71;
-        if (GameSettings.difficutlyLevel == 2) endOfLoopValue = 61;
+        //int endOfLoopValue = 10;
+        //endOfLoopValue = PlayerPrefs.GetInt("difficulty");
+        //if (GameSettings.difficutlyLevel == 1) endOfLoopValue = 71;
+        //if (GameSettings.difficutlyLevel == 2) endOfLoopValue = 61;
+        int endOfLoopValue = PlayerPrefs.GetInt("difficulty");
 
         bool isFinish = false;
 
